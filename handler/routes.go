@@ -1,4 +1,4 @@
-package main
+package handler
 
 import (
 	"encoding/json"
@@ -8,10 +8,12 @@ import (
 	"github.com/go-chi/chi"
 	"github.com/go-chi/cors"
 
+	svc "github.com/anagram-service/service"
 	log "github.com/sirupsen/logrus"
 )
 
-func createHTTPHandler(dict []string) (http.Handler, error) {
+// CreateHTTPHandler func
+func CreateHTTPHandler(dict []string) (http.Handler, error) {
 	mux := chi.NewMux()
 
 	mux.Use(cors.New(cors.Options{
@@ -28,7 +30,7 @@ func createHTTPHandler(dict []string) (http.Handler, error) {
 				return
 			}
 
-			DictToLowerCase(dict)
+			svc.DictToLowerCase(dict)
 
 			w.WriteHeader(http.StatusOK)
 			w.Write([]byte("SUCCESS LOAD DICTIONARY, TRY GET ANAGRAM =)"))
@@ -47,7 +49,7 @@ func createHTTPHandler(dict []string) (http.Handler, error) {
 				return
 			}
 
-			anagrams := SearchAnagrams(dict, word)
+			anagrams := svc.SearchAnagrams(dict, word)
 
 			if len(anagrams) == 0 {
 				http.Error(w, "anagram not found :(\ntry another word", http.StatusNotFound)

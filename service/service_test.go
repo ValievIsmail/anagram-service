@@ -1,4 +1,4 @@
-package main
+package service
 
 import (
 	"reflect"
@@ -6,7 +6,7 @@ import (
 )
 
 // AnagramTesting тестим разные кейсы
-func AnagramTesting(t *testing.T) {
+func TestAnagram(t *testing.T) {
 	dict := []string{"foobar", "aabb", "baba", "boofar", "test"}
 	expected := []string{"foobar", "boofar"}
 

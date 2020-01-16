@@ -8,20 +8,22 @@ import (
 	"syscall"
 	"time"
 
+	"github.com/anagram-service/config"
+	"github.com/anagram-service/handler"
 	log "github.com/sirupsen/logrus"
 )
 
 const appName = "anagram-service"
 
 func main() {
-	config, err := parseConfig(appName)
+	config, err := config.ParseConfig(appName)
 	if err != nil {
 		log.Fatalf("parsing config: %v", err)
 	}
 
 	dict := make([]string, 0, 0)
 
-	handler, err := createHTTPHandler(dict)
+	handler, err := handler.CreateHTTPHandler(dict)
 	if err != nil {
 		log.Fatalf("creating http handler: %v", err)
 	}

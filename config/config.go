@@ -1,4 +1,4 @@
-package main
+package config
 
 import (
 	"time"
@@ -6,7 +6,8 @@ import (
 	"github.com/kelseyhightower/envconfig"
 )
 
-type config struct {
+// Config struct
+type Config struct {
 	API struct {
 		Port         string        `default:":8080" envconfig:"API_PORT"`
 		ReadTimeout  time.Duration `default:"5s" envconfig:"API_READ_TIMEOUT"`
@@ -14,7 +15,8 @@ type config struct {
 	}
 }
 
-func parseConfig(app string) (cfg config, err error) {
+// ParseConfig func
+func ParseConfig(app string) (cfg Config, err error) {
 	if err := envconfig.Process(app, &cfg); err != nil {
 		if err := envconfig.Usage(app, &cfg); err != nil {
 			return cfg, err
