@@ -5,7 +5,9 @@ Request:
 
 1. Загрузить словарь:
 
+```
 curl localhost:8080/load -d '["foobar", "aabb", "baba", "boofar", "test"]'
+```
 
 POST http://localhost:8080/load
 BODY
@@ -15,6 +17,8 @@ BODY
 
 2. Найти анаграму
 
+```
 curl 'localhost:8080/get?word=test'
+```
 
 GET http://localhost:8080/get?word=listen
