@@ -16,27 +16,28 @@ import (
 const appName = "anagram-service"
 
 func main() {
-	config, err := config.ParseConfig(appName)
+	cfg, err := config.ParseConfig(appName)
 	if err != nil {
 		log.Fatalf("parsing config: %v", err)
 	}
 
 	dict := make([]string, 0, 0)
 
-	handler, err := handler.CreateHTTPHandler(dict)
+	h, err := handler.CreateHTTPHandler(dict)
 	if err != nil {
 		log.Fatalf("creating http handler: %v", err)
 	}
 
 	listenErr := make(chan error, 1)
 	server := &http.Server{
-		ReadTimeout:  config.API.ReadTimeout,
-		WriteTimeout: config.API.WriteTimeout,
+		Handler:      h,
+		ReadTimeout:  cfg.API.ReadTimeout,
+		WriteTimeout: cfg.API.WriteTimeout,
 	}
 
 	go func() {
 		log.Println("ANAGRAM-SERVICE STARTED")
-		listenErr <- http.ListenAndServe(config.API.Port, handler)
+		listenErr <- http.ListenAndServe(cfg.API.Port, h)
 	}()
 
 	osSignals := make(chan os.Signal, 1)

@@ -2,7 +2,7 @@ go:
 	go run cmd/*.go
 
 test:
-	go test cmd/test.go
+	go test -v ./...
 	
 build:
 	go build -o ./anagram-service cmd/*.go

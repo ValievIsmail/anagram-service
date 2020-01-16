@@ -22,3 +22,11 @@ curl 'localhost:8080/get?word=test'
 ```
 
 GET http://localhost:8080/get?word=listen
+
+Команды для сервиса:
+
+1. make go - запустить сервис
+2. make test - прогнать тесты
+3. make build - собрать bin
+4. make docker-build - собраз docker-image
+5. make docker-run - запустить сервис в docker контейнере

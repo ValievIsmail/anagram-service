@@ -5,7 +5,7 @@ import (
 	"strings"
 )
 
-// SearchAnagrams ищем анаграму
+// SearchAnagrams ищем анаграму в словаре
 func SearchAnagrams(dict []string, word string) (res []string) {
 	wordRunes := ConvertStrToMap(word)
 
