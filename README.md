@@ -30,3 +30,5 @@ GET http://localhost:8080/get?word=listen
 3. make build - собрать bin
 4. make docker-build - собраз docker-image
 5. make docker-run - запустить сервис в docker контейнере
+
+Swagger - тоже в наличии
