@@ -1,39 +1,43 @@
 package service
 
 import (
-	"reflect"
 	"strings"
 )
 
 // SearchAnagrams ищем анаграму в словаре
 func SearchAnagrams(dict []string, word string) (res []string) {
-	wordRunes := ConvertStrToMap(word)
-
 	for i := 0; i < len(dict); i++ {
-		item := ConvertStrToMap(dict[i])
-
-		if IsAnagram(item, wordRunes) {
+		if IsAnagram(dict[i], word) {
 			res = append(res, dict[i])
 		}
 	}
-
 	return res
 }
 
 // IsAnagram проверяем слово на признак анаграмы
-func IsAnagram(item, word map[rune]int) bool {
-	return reflect.DeepEqual(item, word)
-}
-
-// ConvertStrToMap конвертим строку в мапу
-func ConvertStrToMap(s string) (m map[rune]int) {
-	m = make(map[rune]int, len(s))
-
-	for _, r := range s {
-		m[r]++
+func IsAnagram(s1, s2 string) bool {
+	if len(s1) != len(s2) {
+		return false
 	}
 
-	return m
+	m1 := make(map[rune]int, len(s1))
+	m2 := make(map[rune]int, len(s2))
+
+	for r := range m1 {
+		m1[r]++
+	}
+
+	for r := range m2 {
+		m2[r]++
+	}
+
+	for i := range m1 {
+		if m1[i] != m2[i] {
+			return false
+		}
+	}
+
+	return true
 }
 
 // DictToLowerCase переводим массив в lowercase

@@ -33,11 +33,14 @@ func TestAnagram(t *testing.T) {
 	}
 }
 
-func TestIsAnagram(t *testing.T) {
-	item := ConvertStrToMap("silent")
-	word := ConvertStrToMap("listen")
+func BenchmarkIsAnagram(b *testing.B) {
+	for i := 0; i < b.N; i++ {
+		IsAnagram("listen", "silent")
+	}
+}
 
-	if !IsAnagram(item, word) {
+func TestIsAnagram(t *testing.T) {
+	if !IsAnagram("listen", "silent") {
 		t.Errorf("Failed, expected %t, got %t", true, false)
 	}
 }
